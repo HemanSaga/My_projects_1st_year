@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.ReportController"
+      styleClass="view-container"
+      spacing="20">
+
+    <fx:define>
+        <ToggleGroup fx:id="salesViewToggle"/>
+    </fx:define>
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📈 Reports &amp; Analytics" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="📄 Export PDF" styleClass="secondary-button" onAction="#exportPDF"/>
+        <Button text="📊 Export Excel" styleClass="primary-button" onAction="#exportExcel"/>
+    </HBox>
+    
+    <!-- Report Type Selection -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Report Type:" style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="reportTypeCombo" promptText="Select Report Type" prefWidth="250"/>
+        <Separator orientation="VERTICAL"/>
+        <Label text="Date Range:"/>
+        <DatePicker fx:id="startDatePicker" promptText="Start Date" prefWidth="150"/>
+        <Label text="to"/>
+        <DatePicker fx:id="endDatePicker" promptText="End Date" prefWidth="150"/>
+        <Button text="Generate" styleClass="primary-button" onAction="#generateReport"/>
+    </HBox>
+    
+    <!-- Report Summary Cards -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+        </columnConstraints>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Revenue" styleClass="stat-label"/>
+            <Label fx:id="totalRevenueLabel" text="₹0.00" styleClass="stat-value"/>
+            <Label fx:id="revenueChangeLabel" text="--" styleClass="stat-description"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Stock Value" styleClass="stat-label"/>
+            <Label fx:id="stockValueLabel" text="₹0.00" styleClass="stat-value"/>
+            <Label fx:id="stockChangeLabel" text="--" styleClass="stat-description"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Transactions" styleClass="stat-label"/>
+            <Label fx:id="totalTransactionsLabel" text="0" styleClass="stat-value"/>
+            <Label fx:id="transactionChangeLabel" text="--" styleClass="stat-description"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Avg. Transaction" styleClass="stat-label"/>
+            <Label fx:id="avgTransactionLabel" text="₹0.00" styleClass="stat-value"/>
+            <Label fx:id="avgChangeLabel" text="--" styleClass="stat-description"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Charts Section -->
+    <TabPane VBox.vgrow="ALWAYS" styleClass="chart-tabs">
+        <!-- Sales Trend Tab -->
+        <Tab text="📊 Sales Trend" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="View by:"/>
+                    <RadioButton text="Daily" toggleGroup="$salesViewToggle" selected="true"/>
+                    <RadioButton text="Weekly" toggleGroup="$salesViewToggle"/>
+                    <RadioButton text="Monthly" toggleGroup="$salesViewToggle"/>
+                </HBox>
+                <LineChart fx:id="salesTrendChart" VBox.vgrow="ALWAYS">
+                    <xAxis>
+                        <CategoryAxis label="Period"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Revenue (₹)" side="LEFT"/>
+                    </yAxis>
+                </LineChart>
+            </VBox>
+        </Tab>
+        
+        <!-- Stock Analysis Tab -->
+        <Tab text="📦 Stock Analysis" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <GridPane hgap="20" VBox.vgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="50" />
+                        <ColumnConstraints percentWidth="50" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="300" />
+                    </rowConstraints>
+                    
+                    <VBox spacing="10" GridPane.columnIndex="0">
+                        <Label text="Stock by Category" styleClass="chart-title"/>
+                        <PieChart fx:id="stockByCategoryChart" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                    
+                    <VBox spacing="10" GridPane.columnIndex="1">
+                        <Label text="Stock Movement" styleClass="chart-title"/>
+                        <BarChart fx:id="stockMovementChart" VBox.vgrow="ALWAYS">
+                            <xAxis>
+                                <CategoryAxis label="Product"/>
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis label="Quantity" side="LEFT"/>
+                            </yAxis>
+                        </BarChart>
+                    </VBox>
+                </GridPane>
+            </VBox>
+        </Tab>
+        
+        <!-- Top Products Tab -->
+        <Tab text="⭐ Top Products" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Label text="Rank by:"/>
+                    <ComboBox fx:id="rankingCriteriaCombo" promptText="Select Criteria" prefWidth="200"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Top:"/>
+                    <ComboBox fx:id="topCountCombo" prefWidth="100"/>
+                </HBox>
+                <TableView fx:id="topProductsTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="rankCol" text="Rank" prefWidth="80"/>
+                        <TableColumn fx:id="productNameCol" text="Product Name" prefWidth="250"/>
+                        <TableColumn fx:id="categoryCol" text="Category" prefWidth="150"/>
+                        <TableColumn fx:id="quantitySoldCol" text="Qty Sold" prefWidth="120"/>
+                        <TableColumn fx:id="revenueCol" text="Revenue" prefWidth="150"/>
+                        <TableColumn fx:id="profitMarginCol" text="Profit %" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+        
+        <!-- Supplier Performance Tab -->
+        <Tab text="🏢 Supplier Performance" closable="false">
+            <VBox spacing="15">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <TableView fx:id="supplierPerformanceTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="supplierNameCol" text="Supplier" prefWidth="200"/>
+                        <TableColumn fx:id="productsSuppliedCol" text="Products" prefWidth="100"/>
+                        <TableColumn fx:id="totalOrdersCol" text="Orders" prefWidth="100"/>
+                        <TableColumn fx:id="totalValueCol" text="Total Value" prefWidth="150"/>
+                        <TableColumn fx:id="avgDeliveryTimeCol" text="Avg Delivery" prefWidth="130"/>
+                        <TableColumn fx:id="reliabilityCol" text="Reliability" prefWidth="120"/>
+                    </columns>
+                </TableView>
+            </VBox>
+        </Tab>
+    </TabPane>
+    
+    <!-- Quick Actions -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="action-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Quick Actions:" style="-fx-font-weight: bold;"/>
+        <Button text="📧 Email Report" styleClass="secondary-button" onAction="#emailReport"/>
+        <Button text="🖨️ Print" styleClass="secondary-button" onAction="#printReport"/>
+        <Button text="📅 Schedule Report" styleClass="secondary-button" onAction="#scheduleReport"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lastGeneratedLabel" text="Last generated: --" 
+               style="-fx-text-fill: #64748b; -fx-font-size: 12px;"/>
+    </HBox>
+    
+</VBox>

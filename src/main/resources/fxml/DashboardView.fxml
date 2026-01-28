@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.DashboardController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📊 Dashboard" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Refresh" styleClass="secondary-button" onAction="#refreshDashboard"/>
+    </HBox>
+    
+    <!-- Statistics Cards -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+        </columnConstraints>
+        
+        <!-- Total Products Card -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Total Products" styleClass="stat-label"/>
+            <Label fx:id="totalProductsLabel" text="0" styleClass="stat-value"/>
+            <Label text="In inventory" styleClass="stat-description"/>
+        </VBox>
+        
+        <!-- Low Stock Items Card -->
+        <VBox styleClass="stat-card, alert-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Low Stock Alerts" styleClass="stat-label"/>
+            <Label fx:id="lowStockLabel" text="0" styleClass="stat-value"/>
+            <Label text="Need attention" styleClass="stat-description"/>
+        </VBox>
+        
+        <!-- Total Categories Card -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Categories" styleClass="stat-label"/>
+            <Label fx:id="totalCategoriesLabel" text="0" styleClass="stat-value"/>
+            <Label text="Product types" styleClass="stat-description"/>
+        </VBox>
+        
+        <!-- Total Suppliers Card -->
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Suppliers" styleClass="stat-label"/>
+            <Label fx:id="totalSuppliersLabel" text="0" styleClass="stat-value"/>
+            <Label text="Active partners" styleClass="stat-description"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Charts Section -->
+    <GridPane hgap="20" vgap="20" VBox.vgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="60" />
+            <ColumnConstraints percentWidth="40" />
+        </columnConstraints>
+        
+        <rowConstraints>
+            <RowConstraints minHeight="300" />
+        </rowConstraints>
+        
+        <!-- Stock Transactions Chart -->
+        <VBox styleClass="chart-card" GridPane.columnIndex="0" spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Stock Transactions (Last 7 Days)" styleClass="chart-title"/>
+            <LineChart fx:id="transactionChart" VBox.vgrow="ALWAYS" legendVisible="true">
+                <xAxis>
+                    <CategoryAxis label="Date"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Quantity" side="LEFT"/>
+                </yAxis>
+            </LineChart>
+        </VBox>
+        
+        <!-- Category Distribution Chart -->
+        <VBox styleClass="chart-card" GridPane.columnIndex="1" spacing="15">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+            <Label text="Products by Category" styleClass="chart-title"/>
+            <PieChart fx:id="categoryChart" VBox.vgrow="ALWAYS" legendVisible="true"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Recent Activity -->
+    <VBox styleClass="activity-card" spacing="15">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="Recent Stock Transactions" styleClass="section-title"/>
+        <TableView fx:id="recentTransactionsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="transactionDateCol" text="Date" prefWidth="150"/>
+                <TableColumn fx:id="transactionProductCol" text="Product" prefWidth="250"/>
+                <TableColumn fx:id="transactionTypeCol" text="Type" prefWidth="120"/>
+                <TableColumn fx:id="transactionQuantityCol" text="Quantity" prefWidth="120"/>
+                <TableColumn fx:id="transactionUserCol" text="User" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </VBox>
+    
+</VBox>

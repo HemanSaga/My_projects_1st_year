@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.AlertController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🔔 Low Stock Alerts" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="🔄 Refresh" styleClass="primary-button" onAction="#refreshAlerts"/>
+    </HBox>
+    
+    <!-- Alert Summary -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+        </columnConstraints>
+        
+        <VBox styleClass="stat-card, critical-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Critical Alerts" styleClass="stat-label"/>
+            <Label fx:id="criticalAlertsLabel" text="0" styleClass="stat-value" 
+                   style="-fx-text-fill: #ef4444;"/>
+            <Label text="Stock ≤ 5 units" styleClass="stat-description"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card, warning-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Warning Alerts" styleClass="stat-label"/>
+            <Label fx:id="warningAlertsLabel" text="0" styleClass="stat-value" 
+                   style="-fx-text-fill: #f59e0b;"/>
+            <Label text="Stock ≤ 10 units" styleClass="stat-description"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Alerts" styleClass="stat-label"/>
+            <Label fx:id="totalAlertsLabel" text="0" styleClass="stat-value"/>
+            <Label text="Need attention" styleClass="stat-description"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Filter Bar -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Filter by:"/>
+        <ComboBox fx:id="severityFilterCombo" promptText="Severity" prefWidth="150"/>
+        <ComboBox fx:id="categoryFilterCombo" promptText="Category" prefWidth="150"/>
+        <TextField fx:id="searchField" promptText="🔍 Search products..." prefWidth="250"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Clear Filters" styleClass="secondary-button" onAction="#clearFilters"/>
+    </HBox>
+    
+    <!-- Alerts Table -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="alertCountLabel" text="Showing 0 alerts"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="📄 Export" styleClass="secondary-button" onAction="#exportAlerts"/>
+        </HBox>
+        
+        <TableView fx:id="alertsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="alertSeverityCol" text="Severity" prefWidth="100"/>
+                <TableColumn fx:id="alertProductIdCol" text="ID" prefWidth="60"/>
+                <TableColumn fx:id="alertProductNameCol" text="Product Name" prefWidth="250"/>
+                <TableColumn fx:id="alertSkuCol" text="SKU" prefWidth="120"/>
+                <TableColumn fx:id="alertCategoryCol" text="Category" prefWidth="150"/>
+                <TableColumn fx:id="alertCurrentStockCol" text="Current Stock" prefWidth="120"/>
+                <TableColumn fx:id="alertThresholdCol" text="Threshold" prefWidth="100"/>
+                <TableColumn fx:id="alertSupplierCol" text="Supplier" prefWidth="150"/>
+                <TableColumn fx:id="alertActionsCol" text="Actions" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </VBox>
+    
+</VBox>

@@ -1,0 +1,44 @@
+2026-01-28 21:25:29 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ==============================================
+2026-01-28 21:25:29 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - Starting Inventory Management System...
+2026-01-28 21:25:29 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ==============================================
+2026-01-28 21:25:29 [JavaFX Application Thread] INFO  c.inventory.util.DatabaseConnection - Database configuration loaded successfully
+2026-01-28 21:25:30 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ✓ Database connection successful
+2026-01-28 21:25:30 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - Loading login view...
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  c.i.controller.LoginController - LoginController Initialized
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  c.i.controller.LoginController - LoginController initialization complete
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ✓ Login view loaded successfully
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - Loading CSS stylesheet...
+2026-01-28 21:25:31 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ✓ CSS stylesheet loaded: file:/C:/Users/rishi/Downloads/inventory-management-system/target/classes/css/styles.css
+2026-01-28 21:25:32 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ==============================================
+2026-01-28 21:25:32 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ✓ Application started successfully!
+2026-01-28 21:25:32 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - ==============================================
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - LOGIN ATTEMPT STARTED
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Username entered: 'admin'
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Password length: 11
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Username trimmed: 'admin'
+2026-01-28 21:25:52 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Input validation passed
+2026-01-28 21:25:52 [Thread-3] INFO  c.i.controller.LoginController - Calling AuthenticationService.login()...
+2026-01-28 21:25:52 [Thread-3] INFO  c.i.controller.LoginController - Username being used: 'admin'
+2026-01-28 21:25:52 [Thread-3] INFO  c.i.service.AuthenticationService - Login attempt for user: admin
+2026-01-28 21:25:53 [Thread-3] INFO  com.inventory.util.Session - User logged in: admin (ADMIN)
+2026-01-28 21:25:53 [Thread-3] INFO  c.i.service.AuthenticationService - Login successful for user: admin (Role: ADMIN)
+2026-01-28 21:25:53 [Thread-3] INFO  c.i.controller.LoginController - AuthenticationService.login() returned: User object
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - LOGIN SUCCESSFUL
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - User: admin
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Role: ADMIN
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - ===========================================
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Loading main application window...
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.DashboardController - Initializing DashboardController
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  com.inventory.dao.LowStockAlertDAO - Retrieved 0 pending alerts
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  com.inventory.dao.ProductDAO - Retrieved 27 products
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.inventory.dao.StockTransactionDAO - Retrieved 7 transactions
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.MainController - Loaded view: Dashboard
+2026-01-28 21:25:53 [JavaFX Application Thread] INFO  c.i.controller.LoginController - CSS loaded successfully
+2026-01-28 21:25:55 [JavaFX Application Thread] INFO  c.i.controller.LoginController - Main window loaded successfully
+2026-01-28 21:25:57 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - Application shutting down...
+2026-01-28 21:25:57 [JavaFX Application Thread] INFO  com.inventory.InventoryApplication - Application stopped successfully

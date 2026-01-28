@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.StockController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📋 Stock Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="➕ Stock In" styleClass="primary-button" onAction="#stockIn"/>
+        <Button text="➖ Stock Out" styleClass="secondary-button" onAction="#stockOut"/>
+    </HBox>
+    
+    <!-- Quick Stats -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+        </columnConstraints>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Stock Value" styleClass="stat-label"/>
+            <Label fx:id="totalStockValueLabel" text="₹0.00" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Transactions Today" styleClass="stat-label"/>
+            <Label fx:id="todayTransactionsLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Last Updated" styleClass="stat-label"/>
+            <Label fx:id="lastUpdatedLabel" text="--" styleClass="stat-value" 
+                   style="-fx-font-size: 16px;"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Filter Section -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Filter:"/>
+        <DatePicker fx:id="startDatePicker" promptText="Start Date" prefWidth="150"/>
+        <Label text="to"/>
+        <DatePicker fx:id="endDatePicker" promptText="End Date" prefWidth="150"/>
+        <ComboBox fx:id="transactionTypeCombo" promptText="Transaction Type" prefWidth="150"/>
+        <TextField fx:id="searchField" promptText="🔍 Search..." prefWidth="200"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Apply" styleClass="primary-button" onAction="#applyFilters"/>
+        <Button text="Clear" styleClass="secondary-button" onAction="#clearFilters"/>
+    </HBox>
+    
+    <!-- Transactions Table -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="transactionCountLabel" text="Showing 0 transactions"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="📊 Export Report" styleClass="secondary-button" onAction="#exportReport"/>
+        </HBox>
+        <TableView fx:id="transactionsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="transactionIdCol" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="transactionDateCol" text="Date &amp; Time" prefWidth="180"/>
+                <TableColumn fx:id="transactionProductCol" text="Product" prefWidth="250"/>
+                <TableColumn fx:id="transactionTypeCol" text="Type" prefWidth="120"/>
+                <TableColumn fx:id="transactionQuantityCol" text="Quantity" prefWidth="100"/>
+                <TableColumn fx:id="transactionPriceCol" text="Unit Price" prefWidth="100"/>
+                <TableColumn fx:id="transactionTotalCol" text="Total Value" prefWidth="120"/>
+                <TableColumn fx:id="transactionUserCol" text="User" prefWidth="150"/>
+                <TableColumn fx:id="transactionNotesCol" text="Notes" prefWidth="200"/>
+            </columns>
+        </TableView>
+        
+        <!-- Pagination -->
+        <HBox alignment="CENTER" spacing="10">
+            <Button text="◀ Previous" styleClass="secondary-button" onAction="#previousPage"/>
+            <Label fx:id="pageLabel" text="Page 1 of 1"/>
+            <Button text="Next ▶" styleClass="secondary-button" onAction="#nextPage"/>
+        </HBox>
+    </VBox>
+    
+</VBox>

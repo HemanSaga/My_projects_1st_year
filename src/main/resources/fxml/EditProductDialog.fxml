@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.EditProductController"
+      styleClass="dialog-container"
+      spacing="20"
+      prefWidth="600">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Dialog Title -->
+    <Label text="Edit Product" styleClass="dialog-title" 
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <Separator/>
+    
+    <!-- Form Fields -->
+    <GridPane hgap="15" vgap="15">
+        <columnConstraints>
+            <ColumnConstraints minWidth="120" prefWidth="120"/>
+            <ColumnConstraints hgrow="ALWAYS"/>
+        </columnConstraints>
+        
+        <!-- Product Name -->
+        <Label text="Product Name *" GridPane.columnIndex="0" GridPane.rowIndex="0"
+               style="-fx-font-weight: bold;"/>
+        <TextField fx:id="nameField" promptText="Enter product name" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        
+        <!-- SKU -->
+        <Label text="SKU *" GridPane.columnIndex="0" GridPane.rowIndex="1"
+               style="-fx-font-weight: bold;"/>
+        <TextField fx:id="skuField" promptText="Enter SKU code" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        
+        <!-- Description -->
+        <Label text="Description" GridPane.columnIndex="0" GridPane.rowIndex="2"
+               style="-fx-font-weight: bold;"/>
+        <TextArea fx:id="descriptionArea" promptText="Enter product description" 
+                  prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+        
+        <!-- Category -->
+        <Label text="Category *" GridPane.columnIndex="0" GridPane.rowIndex="3"
+               style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="categoryCombo" promptText="Select category" 
+                  maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        
+        <!-- Supplier -->
+        <Label text="Supplier *" GridPane.columnIndex="0" GridPane.rowIndex="4"
+               style="-fx-font-weight: bold;"/>
+        <ComboBox fx:id="supplierCombo" promptText="Select supplier" 
+                  maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        
+        <!-- Quantity -->
+        <Label text="Quantity *" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               style="-fx-font-weight: bold;"/>
+        <TextField fx:id="quantityField" promptText="0" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+        
+        <!-- Price -->
+        <Label text="Price (₹) *" GridPane.columnIndex="0" GridPane.rowIndex="6"
+               style="-fx-font-weight: bold;"/>
+        <TextField fx:id="priceField" promptText="0.00" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+        
+        <!-- Min Stock Level -->
+        <Label text="Min Stock Level" GridPane.columnIndex="0" GridPane.rowIndex="7"
+               style="-fx-font-weight: bold;"/>
+        <TextField fx:id="minStockField" promptText="10 (default)" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+    </GridPane>
+    
+    <!-- Error Label -->
+    <Label fx:id="errorLabel" textFill="red" wrapText="true" 
+           style="-fx-font-weight: bold;"/>
+    
+    <Separator/>
+    
+    <!-- Buttons -->
+    <HBox spacing="15" alignment="CENTER_RIGHT">
+        <Button text="Cancel" onAction="#cancel" styleClass="secondary-button"
+                prefWidth="100"/>
+        <Button text="Update Product" onAction="#updateProduct" styleClass="primary-button"
+                prefWidth="120"/>
+    </HBox>
+    
+</VBox>

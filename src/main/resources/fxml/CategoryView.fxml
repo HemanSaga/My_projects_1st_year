@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.CategoryController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🏷️ Category Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍 Search categories..." 
+                   prefWidth="250" styleClass="search-field"/>
+        <Button text="➕ Add Category" styleClass="primary-button" onAction="#addCategory"/>
+    </HBox>
+    
+    <!-- Category Stats -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+            <ColumnConstraints percentWidth="33.33" />
+        </columnConstraints>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Categories" styleClass="stat-label"/>
+            <Label fx:id="totalCategoriesLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Active Categories" styleClass="stat-label"/>
+            <Label fx:id="activeCategoriesLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Products Categorized" styleClass="stat-label"/>
+            <Label fx:id="totalProductsLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Categories Table -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="categoryCountLabel" text="Showing 0 categories"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="sortCombo" promptText="Sort by" prefWidth="150"/>
+            <Button text="Export" styleClass="secondary-button" onAction="#exportCategories"/>
+        </HBox>
+        
+        <TableView fx:id="categoriesTable" VBox.vgrow="ALWAYS" prefHeight="300" fixedCellSize="42.0">
+            <placeholder>
+                <Label text="No categories to display" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="categoryIdCol" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="categoryNameCol" text="Category Name" prefWidth="250"/>
+                <TableColumn fx:id="categoryDescriptionCol" text="Description" prefWidth="350"/>
+                <TableColumn fx:id="categoryProductCountCol" text="Products" prefWidth="100"/>
+                <TableColumn fx:id="categoryStatusCol" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="categoryCreatedCol" text="Created Date" prefWidth="150"/>
+                <TableColumn fx:id="categoryActionsCol" text="Actions" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </VBox>
+    
+    <!-- Category Details Panel -->
+    <VBox styleClass="details-panel" spacing="15">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <Label text="Category Details" styleClass="section-title"/>
+        
+        <Separator/>
+        
+        <GridPane hgap="15" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+            
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Selected Category:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedCategoryLabel" text="None selected" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Total Products:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedProductCountLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Description:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedDescriptionLabel" text="--" 
+                       style="-fx-text-fill: #64748b;" wrapText="true"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Status:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedStatusLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+        </GridPane>
+        
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="✏️ Edit" styleClass="primary-button" onAction="#editSelectedCategory"/>
+            <Button text="🗑️ Delete" styleClass="danger-button" onAction="#deleteSelectedCategory"/>
+            <Button text="📋 View Products" styleClass="secondary-button" onAction="#viewCategoryProducts"/>
+        </HBox>
+    </VBox>
+    
+</VBox>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.SupplierController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="🏢 Supplier Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍 Search suppliers..." 
+                   prefWidth="250" styleClass="search-field"/>
+        <Button text="➕ Add Supplier" styleClass="primary-button" onAction="#addSupplier"/>
+    </HBox>
+    <!-- Supplier Stats -->
+    <GridPane hgap="20" vgap="20">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+            <ColumnConstraints percentWidth="25" />
+        </columnConstraints>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Total Suppliers" styleClass="stat-label"/>
+            <Label fx:id="totalSuppliersLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="1">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Active Suppliers" styleClass="stat-label"/>
+            <Label fx:id="activeSuppliersLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="2">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Products Supplied" styleClass="stat-label"/>
+            <Label fx:id="totalProductsLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+        
+        <VBox styleClass="stat-card" spacing="10" GridPane.columnIndex="3">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Pending Orders" styleClass="stat-label"/>
+            <Label fx:id="pendingOrdersLabel" text="0" styleClass="stat-value"/>
+        </VBox>
+    </GridPane>
+    
+    <!-- Filter Bar -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Filter by:"/>
+        <ComboBox fx:id="statusFilterCombo" promptText="Status" prefWidth="150"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Clear Filters" styleClass="secondary-button" onAction="#clearFilters"/>
+    </HBox>
+    
+    <!-- Suppliers Table -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="supplierCountLabel" text="Showing 0 suppliers"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="📧 Email All" styleClass="secondary-button" onAction="#emailAllSuppliers"/>
+            <Button text="Export" styleClass="secondary-button" onAction="#exportSuppliers"/>
+        </HBox>
+        
+        <TableView fx:id="suppliersTable" VBox.vgrow="ALWAYS" prefHeight="300" fixedCellSize="42.0">
+            <placeholder>
+                <Label text="No suppliers to display" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="supplierIdCol" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="supplierNameCol" text="Supplier Name" prefWidth="200"/>
+                <TableColumn fx:id="supplierContactCol" text="Contact Person" prefWidth="150"/>
+                <TableColumn fx:id="supplierEmailCol" text="Email" prefWidth="200"/>
+                <TableColumn fx:id="supplierPhoneCol" text="Phone" prefWidth="130"/>
+                <TableColumn fx:id="supplierAddressCol" text="Address" prefWidth="200"/>
+                <TableColumn fx:id="supplierProductsCol" text="Products" prefWidth="100"/>
+                <TableColumn fx:id="supplierStatusCol" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="supplierActionsCol" text="Actions" prefWidth="150"/>
+            </columns>
+        </TableView>
+    </VBox>
+    
+    <!-- Supplier Details Panel -->
+    <VBox styleClass="details-panel" spacing="15">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        
+        <Label text="Supplier Details" styleClass="section-title"/>
+        
+        <Separator/>
+        
+        <GridPane hgap="15" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="33.33" />
+                <ColumnConstraints percentWidth="33.33" />
+                <ColumnConstraints percentWidth="33.33" />
+            </columnConstraints>
+            
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="Selected Supplier:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedSupplierLabel" text="None selected" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="Contact:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedContactLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <Label text="Email:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedEmailLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="Phone:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedPhoneLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="Products Supplied:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedProductCountLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+            
+            <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label text="Status:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="selectedStatusLabel" text="--" 
+                       style="-fx-text-fill: #64748b;"/>
+            </VBox>
+        </GridPane>
+        
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Button text="✏️ Edit" styleClass="primary-button" onAction="#editSelectedSupplier"/>
+            <Button text="🗑️ Delete" styleClass="danger-button" onAction="#deleteSelectedSupplier"/>
+            <Button text="📋 View Products" styleClass="secondary-button" onAction="#viewSupplierProducts"/>
+            <Button text="📧 Send Email" styleClass="secondary-button" onAction="#emailSupplier"/>
+        </HBox>
+    </VBox>
+    
+</VBox>

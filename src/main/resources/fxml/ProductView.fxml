@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.inventory.controller.ProductController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+    
+    <!-- Page Header -->
+    <HBox alignment="CENTER_LEFT" spacing="15">
+        <Label text="📦 Product Management" styleClass="page-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="🔍 Search products..." 
+                   prefWidth="250" styleClass="search-field"/>
+        <Button text="➕ Add Product" styleClass="primary-button" onAction="#addProduct"/>
+    </HBox>
+    
+    <!-- Filter Bar -->
+    <HBox spacing="15" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <padding>
+            <Insets top="15" right="15" bottom="15" left="15"/>
+        </padding>
+        <Label text="Filter by:"/>
+        <ComboBox fx:id="categoryFilterCombo" promptText="Category" prefWidth="150"/>
+        <ComboBox fx:id="supplierFilterCombo" promptText="Supplier" prefWidth="150"/>
+        <ComboBox fx:id="stockStatusCombo" promptText="Stock Status" prefWidth="150"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Clear Filters" styleClass="secondary-button" onAction="#clearFilters"/>
+    </HBox>
+    
+    <!-- Products Table -->
+    <VBox VBox.vgrow="ALWAYS" styleClass="table-container" spacing="10">
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Label fx:id="productCountLabel" text="Showing 0 products"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Export" styleClass="secondary-button" onAction="#exportProducts"/>
+        </HBox>
+        
+        <TableView fx:id="productsTable" VBox.vgrow="ALWAYS" prefHeight="300" fixedCellSize="42.0">
+            <placeholder>
+                <Label text="No products to display" />
+            </placeholder>
+            <columns>
+                <TableColumn fx:id="productIdCol" text="ID" prefWidth="80"/>
+                <TableColumn fx:id="productNameCol" text="Product Name" prefWidth="250"/>
+                <TableColumn fx:id="productSkuCol" text="SKU" prefWidth="120"/>
+                <TableColumn fx:id="productCategoryCol" text="Category" prefWidth="150"/>
+                <TableColumn fx:id="productSupplierCol" text="Supplier" prefWidth="150"/>
+                <TableColumn fx:id="productQuantityCol" text="Quantity" prefWidth="100"/>
+                <TableColumn fx:id="productPriceCol" text="Price" prefWidth="100"/>
+                <TableColumn fx:id="productActionsCol" text="Actions" prefWidth="150"/>
+            </columns>
+        </TableView>
+        
+        <!-- Pagination -->
+        <HBox alignment="CENTER" spacing="10">
+            <Button text="◀ Previous" styleClass="secondary-button" onAction="#previousPage"/>
+            <Label fx:id="pageLabel" text="Page 1 of 1"/>
+            <Button text="Next ▶" styleClass="secondary-button" onAction="#nextPage"/>
+        </HBox>
+    </VBox>
+    
+</VBox>
