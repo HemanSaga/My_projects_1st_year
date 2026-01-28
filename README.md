@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Inventory Management System
 
 A comprehensive JavaFX-based inventory management system for tracking products, stock levels, suppliers, and generating analytics reports.
@@ -65,3 +66,6 @@ java -cp target/classes;target/dependency/* com.inventory.util.TestLogin
 ## Version
 
 Current Version: 1.0.0
+=======
+# My_projects_1st_year
+>>>>>>> origin/main
